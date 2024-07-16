@@ -1,0 +1,84 @@
+{
+    "name": "juniorfontenele/laravel-hascreator",
+    "description": "Adds creator to models",
+    "keywords": [
+        "juniorfontenele",
+        "laravel-hascreator"
+    ],
+    "homepage": "https://github.com/juniorfontenele/laravel-hascreator",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Junior Fontenele",
+            "email": "github@juniorfontenele.com.br"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "~11"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.16",
+        "pestphp/pest": "^2.34",
+        "spatie/laravel-ray": "^1.37",
+        "spatie/ray": "^1.28",
+        "orchestra/testbench": "^9.1",
+        "nunomaduro/collision": "^8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "JuniorFontenele\\LaravelHascreator\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JuniorFontenele\\LaravelHascreator\\Tests\\": "tests",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JuniorFontenele\\LaravelHascreator\\Providers\\LaravelHascreatorServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "format": "vendor/bin/pint",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "post-root-package-install": [
+            "@php configure.php"
+        ],
+        "post-create-project-cmd": [
+            "@php vendor/bin/testbench workbench:install --ansi"
+        ],
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve"
+        ],
+        "lint": [
+            "@php vendor/bin/pint",
+            "@php vendor/bin/phpstan analyse"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
