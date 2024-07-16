@@ -8,8 +8,8 @@ use JuniorFontenele\LaravelHascreator\Traits\HasCreator;
 
 class User extends Authenticatable
 {
-    use HasFactory;
     use HasCreator;
+    use HasFactory;
 
     protected $fillable = [
         'name',
